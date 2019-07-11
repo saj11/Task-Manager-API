@@ -73,7 +73,7 @@ router.post('/users/logoutAll', auth, async(req, res) => {
     }
 })
 
-router.post('/users/me/avatar', upload.single('avatar'), (req, res) => {
+router.post('/users/me/avatar', upload.single('avatar'), async (req, res) => {
     req.user.avatar = await sharp(req.file.buffer).resize({width: 250, height: 250}).png().toBuffer()
 
     await req.user.save()
